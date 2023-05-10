@@ -87,6 +87,19 @@ int scan(uint32_t color,int brightness, int sequenceDelayTime,int offDelay, int 
   }
 }
 
+int breathing(uint32_t color, int minBrightness, int maxBrightness, int inhaleTime, int holdBreath, int exhaleTime, int endDelayTime){
+  int brightness;
+  strip.setBrightness(minBrightness);
+  while(true){
+    if(brightness > minBrightness){
+      while(brightness < 255){
+        strip.setBrightness(brightness);
+        brightness++;
+      }
+    }
+  }
+}
+
 int staticColor(uint32_t color, int brightness) {
   strip.setBrightness(brightness);
   strip.fill(color, 0, LED_COUNT);   
@@ -99,9 +112,9 @@ void setup() {
 }
 
 void loop() {
-  uint32_t color = strip.Color(0, 0, 0, 20);
+  uint32_t color = strip.Color(255, 20, 0, 0);
   // sequentialUpDownLed(color, 255, 30, 0, 200);
   // staticColor(color, 255);
-  // swipe(color, 255, 30, 0, 200);
-  scan(color, 255, 20, 0, 0, 0);
+  swipe(color, 255, 100, 0, 0);
+  // scan(color, 255, 20, 0, 0, 0);
 }
