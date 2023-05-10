@@ -7,8 +7,6 @@
 //Defining Led's using the above two variables
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
-
-
 /***********************************************************************************/
 //LED patterns/animation functions
 /***********************************************************************************/
@@ -87,14 +85,28 @@ int scan(uint32_t color,int brightness, int sequenceDelayTime,int offDelay, int 
   }
 }
 
-int breathing(uint32_t color, int minBrightness, int maxBrightness, int inhaleTime, int holdBreath, int exhaleTime, int endDelayTime){
-  int brightness;
+int breathing(uint32_t color, int minBrightness = 0, int maxBrightness = 255, int inhaleTime = 0, int holdBreath = 0, int exhaleTime = 0, int endDelayTime = 0){
+  Serial.begin(115200);
+  int brightness = minBrightness;
+  Serial.print(brightness);
   strip.setBrightness(minBrightness);
+  strip.fill(color, 0, LED_COUNT); 
+  strip.show();
+
   while(true){
-    if(brightness > minBrightness){
-      while(brightness < 255){
+    if(brightness >= minBrightness){
+      while(brightness < maxBrightness){
         strip.setBrightness(brightness);
+        strip.show();
         brightness++;
+        Serial.print(brightness);
+      }
+    }
+    if(brightness == maxBrightness){
+      while(brightness > minBrightness){
+        strip.setBrightness(brightness);
+        strip.show();
+        brightness--;
       }
     }
   }
@@ -115,6 +127,7 @@ void loop() {
   uint32_t color = strip.Color(255, 20, 0, 0);
   // sequentialUpDownLed(color, 255, 30, 0, 200);
   // staticColor(color, 255);
-  swipe(color, 255, 100, 0, 0);
+  // swipe(color, 255, 100, 0, 0);
   // scan(color, 255, 20, 0, 0, 0);
+  breathing(color, 1, 255);
 }
