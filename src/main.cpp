@@ -104,4 +104,4 @@ void loop() {
   int runFunc = swipe(color, 255, 30, 0, 200);
   // int runFunc = scan(color, 100, 20, 0, 0, 0);
 }
-//testing
+
