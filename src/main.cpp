@@ -6,11 +6,13 @@
 #define LED_COUNT 16
 //Defining Led's using the above two variables
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
+
+
+
 /***********************************************************************************/
 //LED patterns/animation functions
 /***********************************************************************************/
 
-//ledOnStatus should be either true or false depending on 
 int sequentialUpDownLed(uint32_t color,int brightness, int sequenceDelayTime,int delayBetweenTransition, int endDelayTime){
   uint32_t pixelsOff = strip.Color(0, 0, 0, 0);  //Setting the NeoPixels to "off" by setting RGB color code to 0,0,0 (black)
   strip.setBrightness(brightness);
