@@ -99,9 +99,8 @@ void setup() {
 
 void loop() {
   uint32_t color = strip.Color(255, 40, 0, 0);
-//   int runFunc = sequentialUpDownLed(color, 255, 30, 0, 200);
-  // int runFunc = staticColor(color, 255);
-  int runFunc = swipe(color, 255, 30, 0, 200);
-  // int runFunc = scan(color, 100, 20, 0, 0, 0);
+  // sequentialUpDownLed(color, 255, 30, 0, 200);
+  // staticColor(color, 255);
+  swipe(color, 255, 30, 0, 200);
+  // scan(color, 100, 20, 0, 0, 0);
 }
-
