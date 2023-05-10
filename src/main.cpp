@@ -85,30 +85,31 @@ int scan(uint32_t color,int brightness, int sequenceDelayTime,int offDelay, int 
   }
 }
 
-int breathing(uint32_t color, int minBrightness = 0, int maxBrightness = 255, int inhaleTime = 0, int holdBreath = 0, int exhaleTime = 0, int endDelayTime = 0){
-  Serial.begin(115200);
-  int brightness = minBrightness;
-  Serial.print(brightness);
-  strip.setBrightness(minBrightness);
-  strip.fill(color, 0, LED_COUNT); 
-  strip.show();
-
+int breathing(uint32_t color, int minBrightness, int maxBrightness, int inhaleTime = 0, int holdBreath = 0, int exhaleTime = 0, int endDelay = 0){
   while(true){
+    int brightness = minBrightness;
+    strip.setBrightness(minBrightness);
+    strip.fill(color, 0, LED_COUNT); 
+    strip.show();
+
     if(brightness >= minBrightness){
       while(brightness < maxBrightness){
+        brightness++;
         strip.setBrightness(brightness);
         strip.show();
-        brightness++;
-        Serial.print(brightness);
+        delay(inhaleTime);
       }
     }
+    delay(holdBreath);
     if(brightness == maxBrightness){
       while(brightness > minBrightness){
+        brightness--;
         strip.setBrightness(brightness);
         strip.show();
-        brightness--;
+        delay(exhaleTime);
       }
     }
+    delay(endDelay);
   }
 }
 
@@ -124,10 +125,10 @@ void setup() {
 }
 
 void loop() {
-  uint32_t color = strip.Color(255, 20, 0, 0);
+  uint32_t color = strip.Color(255, 50, 0, 0);
   // sequentialUpDownLed(color, 255, 30, 0, 200);
-  // staticColor(color, 255);
   // swipe(color, 255, 100, 0, 0);
   // scan(color, 255, 20, 0, 0, 0);
-  breathing(color, 1, 255);
+  breathing(color, 1, 255, 40, 10, 10, 10);
+  // staticColor(color, 255);
 }
