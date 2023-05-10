@@ -94,15 +94,14 @@ int staticColor(uint32_t color, int brightness) {
 }
 
 void setup() {
-  Serial.begin(9600);
   strip.begin();
   strip.show(); // Initialize all pixels to off
 }
 
 void loop() {
-  uint32_t color = strip.Color(255, 0, 255, 100);
+  uint32_t color = strip.Color(0, 0, 0, 20);
   // sequentialUpDownLed(color, 255, 30, 0, 200);
   // staticColor(color, 255);
-  swipe(color, 255, 30, 0, 200);
-  // scan(color, 100, 20, 0, 0, 0);
+  // swipe(color, 255, 30, 0, 200);
+  scan(color, 255, 20, 0, 0, 0);
 }
