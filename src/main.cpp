@@ -1,6 +1,6 @@
 //Importing Libraries
 #include <Adafruit_NeoPixel.h>
-
+#include <FreeRTOS_AVR.h>
 //Define some global variables here:
 #define LED_PIN 3
 #define LED_COUNT 16
@@ -66,19 +66,19 @@ int scan(uint32_t color,int brightness, int sequenceDelayTime,int offDelay, int 
     delay(offDelay);
     for (int i = -1; i <= LED_COUNT; i++) { //looping through the NeoPixel array
       strip.setPixelColor(i, pixelsOff); //Setting the color to a noColor variable defined above
-      strip.show(); //Turning each pixel off (because noColor is black)
+      strip.show(); //Turning each pixel off (noColor is black)
       delay(sequenceDelayTime); //Adding delay between the activation of each pixel
     }
     delay(returnDelay);
     for (int i = LED_COUNT; i >= -1; i--) { //Backwards looping through the NeoPixel array
       strip.setPixelColor(i, color); //Setting the color to a noColor variable defined above
-      strip.show(); //Turning each pixel off (because noColor is black)
+      strip.show(); //Turning each pixel off (noColor is black)
       delay(sequenceDelayTime); //Adding delay between the activation of each pixel
     }
     delay(offDelay);
     for (int i = LED_COUNT; i >= -1; i--) { //Backwards looping through the NeoPixel array
       strip.setPixelColor(i, pixelsOff); //Setting the color to a noColor variable defined above
-      strip.show(); //Turning each pixel off (because noColor is black)
+      strip.show(); //Turning each pixel off (noColor is black)
       delay(sequenceDelayTime); //Adding delay between the activation of each pixel
     }
     delay(endDelay);
@@ -100,7 +100,7 @@ void setup() {
 }
 
 void loop() {
-  uint32_t color = strip.Color(255, 40, 0, 0);
+  uint32_t color = strip.Color(255, 0, 255, 100);
   // sequentialUpDownLed(color, 255, 30, 0, 200);
   // staticColor(color, 255);
   swipe(color, 255, 30, 0, 200);
